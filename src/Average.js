@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 
 const getAverage = numbers => {
     console.log('평균갑 계산 중..');
@@ -20,13 +20,16 @@ const Average = () => {
         console.log(nextList);
         setList(nextList);
         setNumber('');
+        inputEl.current.focus();
     }, [number, list]);
     
     const avg = useMemo(()=>{getAverage(list)}, [list]);
 
+    const inputEl = useRef(null);
+
     return (
         <div>
-            <input onChange={onChange} value={number}/>
+            <input ref={inputEl} onChange={onChange} value={number}/>
             <button onClick={onInsert}>
                 저장
             </button>
