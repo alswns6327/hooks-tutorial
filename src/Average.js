@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 const getAverage = numbers => {
     console.log('평균갑 계산 중..');
@@ -11,16 +11,16 @@ const Average = () => {
     const [list, setList] = useState([]);
     const [number, setNumber] = useState('');
 
-    const onChange = e => {
+    const onChange = useCallback( e => {
         setNumber(e.target.value);
-    }
+    }, []);
     
-    const onInsert = e => {
+    const onInsert = useCallback(e => {
         const nextList = list.concat(parseInt(number));
         console.log(nextList);
         setList(nextList);
         setNumber('');
-    }
+    }, [number, list]);
     
     const avg = useMemo(()=>{getAverage(list)}, [list]);
 
