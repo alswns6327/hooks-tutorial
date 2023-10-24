@@ -1,8 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 
 const Info = () => {
-    const [name, setName] = useState('');
-    const [nickname, setNickname] = useState('');
+
+    const reducer = (state, action) =>{
+        console.log(action);
+        return {
+            ...state,
+            [action.name] : action.value
+        };
+    }
+
+    const [state, dispatch] = useReducer(reducer, {
+        name : '',
+        nickname :''
+    });
+
+    const {name, nickname} = state;
 
     useEffect(()=>{
         console.log('first');
@@ -14,18 +27,18 @@ const Info = () => {
     }, [])
 
     const onChangeName = e => {
-        setName(e.target.value);
+        dispatch(e.target);
     }
 
     const onChangeNickname = e => {
-        setNickname(e.target.value);
+        dispatch({name : e.target.name, value : e.target.value});
     }
 
     return (
         <div>
             <div>
-                <input value={name} onChange={onChangeName}/>
-                <input value={nickname} onChange={onChangeNickname}/>
+                <input name='name' value={name} onChange={onChangeName}/>
+                <input name='nickname' value={nickname} onChange={onChangeNickname}/>
             </div>
             <div>
                 <div>
