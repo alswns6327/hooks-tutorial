@@ -1,19 +1,25 @@
 import React, { useEffect, useReducer, useState } from 'react';
+import useInputs from './useInputs';
 
 const Info = () => {
 
-    const reducer = (state, action) =>{
-        console.log(action);
-        return {
-            ...state,
-            [action.name] : action.value
-        };
-    }
+    // const reducer = (state, action) =>{
+    //     console.log(action);
+    //     return {
+    //         ...state,
+    //         [action.name] : action.value
+    //     };
+    // }
 
-    const [state, dispatch] = useReducer(reducer, {
+    // const [state, dispatch] = useReducer(reducer, {
+    //     name : '',
+    //     nickname :''
+    // });
+
+    const [state, onChange] = useInputs({
         name : '',
-        nickname :''
-    });
+        nickname : ''
+    })
 
     const {name, nickname} = state;
 
@@ -26,19 +32,11 @@ const Info = () => {
         }
     }, [])
 
-    const onChangeName = e => {
-        dispatch(e.target);
-    }
-
-    const onChangeNickname = e => {
-        dispatch({name : e.target.name, value : e.target.value});
-    }
-
     return (
         <div>
             <div>
-                <input name='name' value={name} onChange={onChangeName}/>
-                <input name='nickname' value={nickname} onChange={onChangeNickname}/>
+                <input name='name' value={name} onChange={onChange}/>
+                <input name='nickname' value={nickname} onChange={onChange}/>
             </div>
             <div>
                 <div>

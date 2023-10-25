@@ -9,13 +9,14 @@ function App() {
   const [visible, setVisible] = useState(false);
   return (
     <div>
-      {/* <button onClick={()=>{setVisible(!visible)}}>
+      <button onClick={()=>{setVisible(!visible)}}>
         {visible? '숨기기' : '보이기'}
       </button>
       <hr/>
-      {visible && <Info></Info>} */}
+      {visible && <Info></Info>}
       {/* <Counter></Counter> */}
-      <Average></Average>
+      {/* <Average></Average> */}
+
     </div>
   );
 }
